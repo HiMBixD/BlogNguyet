@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {PageContainerComponent} from "./page-container/page-container.component";
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./home-page/home-page.module').then(m => m.HomePageModule),
+    component: PageContainerComponent,
+    children: [
+      {
+        path: '',
+        canActivate: [],
+        loadChildren: () => import('./child-modules/home-page/home-page.module').then(m => m.HomePageModule)
+      },
+    ]
   }
 ];
 
